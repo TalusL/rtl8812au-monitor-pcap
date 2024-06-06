@@ -41,7 +41,7 @@ jobs:
            cd vcpkg &&
            .\bootstrap-vcpkg.bat &&
            .\vcpkg integrate install &&
-           .\vcpkg install libusb libpcap &&
+           .\vcpkg install libusb libpcap vcpkg-tool-ninja &&
            cd .. &&
-           cmake -DCMAKE_TOOLCHAIN_FILE=D:/a/rtl8812au-monitor-pcap/rtl8812au-monitor-pcap/vcpkg/scripts/buildsystems/vcpkg.cmake -G Ninja -S ./ -B "build" &&
+           cmake "-DCMAKE_MAKE_PROGRAM=D:/a/rtl8812au-monitor-pcap/rtl8812au-monitor-pcap/vcpkg/installed/x64-windows/tools/ninja/ninja.exe" "-DCMAKE_TOOLCHAIN_FILE=D:/a/rtl8812au-monitor-pcap/rtl8812au-monitor-pcap/vcpkg/scripts/buildsystems/vcpkg.cmake" -G Ninja -S ./ -B "build" &&
            cmake --build build --config Release --target WiFiCapture
