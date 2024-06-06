@@ -34,9 +34,6 @@ int gettimeofday(struct timeval *tp, void *tzp)
 }
 #endif
 
-#define USB_VENDOR_ID 0x0b05
-#define USB_PRODUCT_ID 0x17d2
-
 #define MAX_PACKET_SIZE 65535
 
 pcap_t *handle;
@@ -52,11 +49,26 @@ static void packetProcessor(const Packet &packet) {
   pcap_dump((u_char *) dumper, &hdr,reinterpret_cast<const u_char *>(packet.Data.data()));
 }
 
-int main() {
+int main(int argc, char *argv[]) {
+
+
+  if (argc != 4) {
+    std::cerr << "Usage: " << argv[0] << " [USB_VID]:[USB_PID] [WIFI_CHANNEL] [PCAP_FILE_NAME]" << std::endl;
+    return 1;
+  }
+
+  std::string wifiDeviceIDString = argv[1];
+  std::istringstream iss(wifiDeviceIDString);
+  unsigned int wifiDeviceVid, wifiDevicePid;
+  char c;
+  iss >> std::hex >> wifiDeviceVid >>c>> wifiDevicePid;
+
+  int channelNumber = std::stoi(argv[2]);
+  std::string outputFileName = argv[3];
 
 
   handle = pcap_open_dead(DLT_IEEE802_11, MAX_PACKET_SIZE);
-  dumper = pcap_dump_open_append(handle, "80211.pcap");
+  dumper = pcap_dump_open_append(handle, outputFileName.c_str());
   if (dumper == nullptr) {
     fprintf(stderr, "pcap_dump_open_append() failed: %s\n", pcap_geterr(handle));
     pcap_close(handle);
@@ -81,10 +93,10 @@ int main() {
 #endif
 
   libusb_device_handle *dev_handle =
-      libusb_open_device_with_vid_pid(ctx, USB_VENDOR_ID, USB_PRODUCT_ID);
+      libusb_open_device_with_vid_pid(ctx, wifiDeviceVid, wifiDevicePid);
   if (dev_handle == NULL) {
-    logger->error("Cannot find device {:04x}:{:04x}", USB_VENDOR_ID,
-                  USB_PRODUCT_ID);
+    logger->error("Cannot find device {:04x}:{:04x}", wifiDeviceVid,
+                  wifiDevicePid);
     libusb_exit(ctx);
     return 1;
   }
@@ -101,7 +113,8 @@ int main() {
   rtlDevice->Init(packetProcessor, SelectedChannel{
                                        .Channel = 36,
                                        .ChannelOffset = 0,
-                                       .ChannelWidth = CHANNEL_WIDTH_80,
+                                       .ChannelWidth =
+                                           static_cast<ChannelWidth_t>(channelNumber),
                                    });
 
   rc = libusb_release_interface(dev_handle, 0);
