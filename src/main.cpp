@@ -52,8 +52,8 @@ static void packetProcessor(const Packet &packet) {
 int main(int argc, char *argv[]) {
 
 
-  if (argc != 4) {
-    std::cerr << "Usage: " << argv[0] << " [USB_VID]:[USB_PID] [WIFI_CHANNEL] [PCAP_FILE_NAME]" << std::endl;
+  if (argc != 5) {
+    std::cerr << "Usage: " << argv[0] << " [USB_VID]:[USB_PID] [WIFI_CHANNEL] [WIFI_CHANNEL_WIDTH] [PCAP_FILE_NAME]" << std::endl;
     return 1;
   }
 
@@ -63,8 +63,9 @@ int main(int argc, char *argv[]) {
   char c;
   iss >> std::hex >> wifiDeviceVid >>c>> wifiDevicePid;
 
-  int channelNumber = std::stoi(argv[2]);
-  std::string outputFileName = argv[3];
+  uint8_t channelNumber = std::stoi(argv[2]);
+  int channelWidth = std::stoi(argv[3]);
+  std::string outputFileName = argv[4];
 
 
   handle = pcap_open_dead(DLT_IEEE802_11, MAX_PACKET_SIZE);
@@ -111,10 +112,9 @@ int main(int argc, char *argv[]) {
   WiFiDriver wifi_driver{logger};
   auto rtlDevice = wifi_driver.CreateRtlDevice(dev_handle);
   rtlDevice->Init(packetProcessor, SelectedChannel{
-                                       .Channel = 36,
+                                       .Channel = channelNumber,
                                        .ChannelOffset = 0,
-                                       .ChannelWidth =
-                                           static_cast<ChannelWidth_t>(channelNumber),
+                                       .ChannelWidth = static_cast<ChannelWidth_t>(channelWidth),
                                    });
 
   rc = libusb_release_interface(dev_handle, 0);
