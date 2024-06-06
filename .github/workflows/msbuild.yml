@@ -43,5 +43,5 @@ jobs:
            .\vcpkg integrate install &&
            .\vcpkg install libusb libpcap &&
            cd .. &&
-           cmake -DCMAKE_TOOLCHAIN_FILE=D:/a/rtl8812au-monitor-pcap/rtl8812au-monitor-pcap/vcpkg/scripts/buildsystems/vcpkg.cmake -G Ninja -A x64 -S ./ -B "build64" &&
-           cmake --build build64 --config Release --target WiFiCapture
+           cmake -DCMAKE_TOOLCHAIN_FILE=D:/a/rtl8812au-monitor-pcap/rtl8812au-monitor-pcap/vcpkg/scripts/buildsystems/vcpkg.cmake -G Ninja -S ./ -B "build" &&
+           cmake --build build --config Release --target WiFiCapture
