@@ -45,3 +45,7 @@ jobs:
            cd .. &&
            cmake "-DCMAKE_TOOLCHAIN_FILE=D:/a/rtl8812au-monitor-pcap/rtl8812au-monitor-pcap/vcpkg/scripts/buildsystems/vcpkg.cmake" -S ./ -B "build" &&
            cmake --build build --config Release --target WiFiCapture
+      uses: actions/upload-artifact@v4
+      with:
+        name: WiFiCapture
+        path: build/Release/
