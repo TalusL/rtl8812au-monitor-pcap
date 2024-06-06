@@ -43,5 +43,5 @@ jobs:
            .\vcpkg integrate install &&
            .\vcpkg install libusb libpcap &&
            cd .. &&
-           cmake -DCMAKE_TOOLCHAIN_FILE=vcpkg/scripts/buildsystems/vcpkg.cmake -A x64 -S ./ -B "build64" &&
+           cmake -DCMAKE_TOOLCHAIN_FILE=.\vcpkg\scripts\buildsystems\vcpkg.cmake -A x64 -S ./ -B "build64" &&
            cmake --build build64 --config Release --target WiFiCapture
