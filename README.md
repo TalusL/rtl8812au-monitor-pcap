@@ -15,11 +15,11 @@ download [Zadig](https://github.com/pbatard/libwdi/releases/download/v1.5.0/zadi
 
 
 - Command line
-```
+```shell
 WiFiCapture [USB_VID]:[USB_PID] [WIFI_CHANNEL] [WIFI_CHANNEL_WIDTH] [PCAP_FILE_NAME]
 
-example:
-capture dongle (0B05:17D2) WIFI channel 36 channel width 80 to 80211.pcap
+#example:
+#capture dongle (0B05:17D2) WIFI channel 36 channel width 80 to 80211.pcap
 
 WiFiCapture 0B05:17D2 36 2 80211.pcap
 
