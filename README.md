@@ -9,7 +9,7 @@ The RTL8812AU driver that simply devours its competitors
 ### usage
 - Repair libusb driver
 
-download Zadig
+download [Zadig](https://github.com/pbatard/libwdi/releases/download/v1.5.0/zadig-2.8.exe)
 
 ![img.png](images/img.png)
 
