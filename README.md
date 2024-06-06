@@ -13,9 +13,6 @@ download Zadig
 
 ![img.png](images/img.png)
 
-802.11 radio packet
-
-![img_1.png](images/img_1.png)
 
 - Command line
 ```
@@ -41,6 +38,10 @@ enum ChannelWidth_t {
   CHANNEL_WIDTH_MAX = 7,
 };
 ```
+
+- 802.11 radio packet
+
+![img_1.png](images/img_1.png)
 
 ### Windows Build
 
