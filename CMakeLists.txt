@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.15)
 
 project(Rtl8812auNet)
 
+set(CMAKE_CXX_STANDARD 20)
+
 find_package(PkgConfig REQUIRED)
 
 pkg_check_modules(LIBUSB REQUIRED IMPORTED_TARGET libusb-1.0)
