@@ -36,7 +36,7 @@ enum ChannelWidth_t {
 };
 ```
 
-### Windows
+### Windows Build
 
 You can download and install libraries using the vcpkg dependency manager:
 
