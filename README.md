@@ -17,6 +17,7 @@ cd vcpkg
 .\bootstrap-vcpkg.bat
 .\vcpkg integrate install
 .\vcpkg install libusb libpcap
+cd ..
 cmake -DCMAKE_TOOLCHAIN_FILE=vcpkg/scripts/buildsystems/vcpkg.cmake  -G "Visual Studio 16 2019" -A x64 -S ./ -B "build64" 
 cmake --build build64 --config Release --target WiFiCapture
 ```
