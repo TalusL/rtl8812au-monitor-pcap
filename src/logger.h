@@ -3,7 +3,6 @@
 
 #include <memory>
 
-#include <fmt/format.h>
 #include <string>
 #include <iostream>
 #include <vector>
