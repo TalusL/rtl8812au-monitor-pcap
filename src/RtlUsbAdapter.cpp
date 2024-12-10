@@ -94,10 +94,10 @@ void RtlUsbAdapter::rtl8812au_hw_reset() {
     rtw_write16(REG_CR, 0);
 
     /* reset MAC */
-    reg_val = rtw_read8(REG_APS_FSMCO + 1);
-    reg_val |= BIT1;
-    rtw_write8(REG_APS_FSMCO + 1,
-               (uint8_t)reg_val); /* reg0x5[1] ,auto FSM off */
+//    reg_val = rtw_read8(REG_APS_FSMCO + 1);
+//    reg_val |= BIT1;
+//    rtw_write8(REG_APS_FSMCO + 1,
+//               (uint8_t)reg_val); /* reg0x5[1] ,auto FSM off */
 
     reg_val = rtw_read8(REG_APS_FSMCO + 1);
 
